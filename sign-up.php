@@ -11,16 +11,7 @@
 	   <script type="text/javascript" src="js/signUp.js"></script>
 	    
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        span {
-             margin: 0;
-             font-size: 1em;
-             font-style: italic;
-             font-family: serif;
-             color: red;
-        }
-   </style>
-   
+
 </head>
 
 
@@ -34,7 +25,7 @@
      
 	
     <nav>
-     <a href="index.html">Home</a>
+     <a href="index.php">Home</a>
 
       
     </nav>
