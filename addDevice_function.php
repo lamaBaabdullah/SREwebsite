@@ -1,73 +1,54 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>addDevice_function</title>
-</head>
-<body>
-
 <?php
+
 include('connection.php');
-
-$deviseName= $_POST['text'];
-$Description= $_POST['textarea'];
-
-if (empty($deviseName) && empty($Description) )
-{
+ if (empty($_POST['text']) && empty($_POST['textarea']) )
+ {
 $_SESSION['incorrect']  = "please fill all entres";
 header("Location: addDevice.php?");     
 }
 
 else 
-if (empty($deviseName))
+if (empty($_POST['text']))
 {
 $_SESSION['incorrect']  = "Enter Device Name ";
 header("Location: addDevice.php?");     
 } 
 
 else
-if(empty($Description))
+if(empty($_POST['textarea']))
 {
 $_SESSION['incorrect']  = "Enter Devise Description";
 header("Location: addDevice.php?");  
 }
-else
-{
-//no image
-if (empty($_FILES["image"]["name"]))
+else 
+if (empty($_FILES["file"]["name"]))
 { 
-{
 $_SESSION['incorrect']  = "Add device photo";
-header("Location: addDevice.php?");  
-}
-}
-else // has image
-{
-// Get file info 
-$fileName = basename($_FILES["image"]["name"]); 
-$fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
-
-// Allow certain file formats 
-$allowTypes = array('jpg','png','jpeg','gif'); 
-if(in_array($fileType, $allowTypes)){ 
-$image = $_FILES['image']['tmp_name']; 
-$imgContent = addslashes(file_get_contents($image)); 
-
-// Insert image content into database 
-$query="INSERT INTO device (device_name, description,photo) VALUES('$deviseName','$Description','$imgContent')";
-$result = mysqli_query($connection, $query);
+header("Location: addDevice.php");  
 }
 
-}
-}
-
-if($result)
-{
-$deviceID = mysqli_insert_id($connection);
-header('Location: DevicesPage.php?$deviceID='.$deviceID);
-}
-//end
+    
+    
+    
+     if (!empty($_POST['text']) && !empty($_POST['textarea']) ){
+        $Description = $_POST['textarea'];
+        $deviceName = $_POST['text'];
+       
+         // Get file's name
+        $fileName = $_FILES['file']['name'];
+         
+        // File Path (if you want to change the folder, you should create it first or you will get an error)
+        $filePath = "images/".basename($fileName);
+        
+   
+      if(move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
+        $query="INSERT INTO device(device_name , description , photo ) VALUES('$deviceName','$Description', '$filePath')";
+        
+           $requestResult = (mysqli_query( $connection, $query ));
+     }
+     }
+        if ( $requestResult ){
+          $_SESSION['success'] = 'Request has been updated';
+          header("Location: AdminHome.php");
+        }
 ?>
-</body>
-</html>
