@@ -4,13 +4,13 @@ include('connection.php');
 
     $Pid= $_GET['id'];
     
-    if ( empty($_POST['major']) || empty($_POST['programName']) || empty($_POST['Description']) ){
-        $_SESSION['fill'] = 'please fill all in the form';
-        header("Location: UpdateProgram.php?id=$Did");  
+    if (($_POST['major']==" ") || empty($_POST['programName']) || empty($_POST['Description']) ){
+        $_SESSION['incorrect'] = 'please fill all in the form';
+        header("Location: UpdateProgram.php?id=$Pid");  
     }
     
    
-    
+    else
      if (!empty($_POST['major']) && !empty($_POST['programName']) && !empty($_POST['Description']) ){
         $major = $_POST['major'] ;
         $Description = $_POST['Description'];
@@ -40,6 +40,6 @@ include('connection.php');
      
         if ( $requestResult ){
           $_SESSION['success'] = 'Request has been updated';
-          header("Location: UpdateProgram.php");
+          header("Location: AdminHome.php");
         }
 ?>
