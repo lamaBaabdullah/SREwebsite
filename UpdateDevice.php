@@ -7,6 +7,7 @@
   <title>update Device</title>
        <script src="js/add.js"></script>
 	 <script type="text/javascript" src="script.js"></script>
+         <script type="text/javascript" src="js/add.js"></script>
 	   <script src="https://kit.fontawesome.com/ff4e223e2d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
 	  
@@ -19,8 +20,7 @@
     <?php
         include('connection.php');
     
-         $_SESSION["id"]= 2 ; 
-         $Did = $_SESSION["id"] ;
+         $Did= $_GET['id'];
     ?>
   <header>
   <img class="attach" id="logopic" src="images/logo.png" alt="logo" width="20%" > 
@@ -31,7 +31,7 @@
 	
     <nav>
     <a href="AdminHome.php">Home</a>
-      <a href="index.html"> Log-out</a>
+    <a href="LogOut.php"> Log-out</a>
       
     </nav>
   </header>
@@ -45,6 +45,14 @@
             <fieldset> 
                 <legend> Update Device</legend>
 				</br>
+                                <?php
+                 $msg = $_SESSION['incorrect'];
+                if(isset($_SESSION['incorrect'])){
+                        echo "<span>".$msg."</span>";
+                    }
+			    unset( $_SESSION['incorrect']);
+                            echo '</br>';
+                     ?>
                  <label>Device Name:</label>
                  <?php
                        $sql = "SELECT * from device WHERE id=$Did";
@@ -68,7 +76,7 @@
 		 <label>Change photo:</label>
                  </br> 
 				  </br>
-                 <input  class="file" type="file" name="file" id="img" >
+                 <input  class="file" type="file" name="file" id="img" accept="image/*" height = "17" width= "17">
                   <?php
                 $sql = "SELECT * from device WHERE id=$Did";
                 $result = mysqli_query($connection, $sql);
@@ -85,7 +93,7 @@
                 }
              ?>
 		 </br></br>
-                 <button class="submit" type="submit" id="submit" onclick="validation2();return false">Submit</button>
+                 <button class="submit" type="submit" id="submit" onclick="">Submit</button>
 				 <input  class="submit" type="button" id=" Cancel" value="Cancel" onclick="Cancel()">
 				 </br>
 				 </br>
