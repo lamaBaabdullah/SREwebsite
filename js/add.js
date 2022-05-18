@@ -1,18 +1,18 @@
 
 function newSubmit(){
-    document.getElementById("submit").onclick =  location.href = "AdminHome.html";
+    document.getElementById("submit").onclick =  location.href = "AdminHome.php";
   }
   function newSubmit2(){
-    document.getElementById("submit").onclick =  location.href = "reviews.html";
+    document.getElementById("submit").onclick =  location.href = "reviews.php";
   }
   
   
   function Cancel(){
-    document.getElementById("Cancel").onclick =  location.href = "AdminHome.html";
+    document.getElementById("Cancel").onclick =  location.href = "AdminHome.php";
   }
   
     function Cancel2(){
-    document.getElementById("Cancel").onclick =  location.href = "reviews.html";
+    document.getElementById("Cancel").onclick =  location.href = "reviews.php";
   }
   
   
