@@ -15,6 +15,10 @@
                 border-collapse: separate;
                 border-spacing: 0 50px;
             }
+            img{
+                width:250px;
+                height:250px;
+            }
         </style>
 	  
    
@@ -29,12 +33,12 @@
          session_start();
 //for manager pages
          if(!isset($_SESSION['entered'])){
-              header("Location: index.html");
+              header("Location: index.php");
             }
 ?>
     <nav>
- <a href="index.html">Home</a>
-      <a href="index.html"> Log-out</a>
+ <a href="AdminHome.php">Home</a>
+ <a href="LogOut.php"> Log-out</a>
       
     </nav>
   </header>
@@ -46,18 +50,8 @@
        
        <?php
            include('connection.php');
-    
-             $_SESSION["id"]= 1 ; 
-             $Mid = $_SESSION["id"] ;
-      
-             $sql = "SELECT * from manager";
-                $result = mysqli_query($connection, $sql);
-             while ($row = mysqli_fetch_assoc($result)) {
-                 if ($row['id'] == $Mid)
-             echo "<h1> Welcome to SRE Admin ".$row['first_name']." ".$row['last_name']."</h1>" ;
-                 }
-            
-                 ?>
+             echo "<h1> Welcome to SRE Admin ".$_SESSION['name']."</h1>" ;
+       ?>
 	  
     </section>
 	</br>
@@ -81,7 +75,7 @@
          echo' <figure> ';
        echo '<img id="img" src="'.$row['photo'].'" alt="program img">';
        echo' <figcaption>';
-         echo $row['program_name'].' (<a href="reviews.php?id="'.$row['id'].'" target="_blank">see more..</a>)';
+         echo $row['program_name'].' (<a href="reviews.php?id='.$row['id'].'&name='.$row['program_name'].'" target="_blank">see more..</a>)';
           echo '</figcaption>';
 	echo	'</br>';
          echo '<a id="update" href = "deletePfunction.php?id='.$row['id'].'"> Delete </a> &nbsp&nbsp&nbsp&nbsp'
@@ -118,9 +112,9 @@
           $result = mysqli_query($connection, $sql);
          while ($row = mysqli_fetch_assoc($result)) {
          echo' <figure> ';
-       echo '<img id="img" src="'.$row['photo'].'" alt="program img">';
+       echo '<img id="img" src="'.$row['photo'].'" alt="device img">';
        echo' <figcaption>';
-         echo $row['program_name'].' (<a href="reviews.php?id="'.$row['id'].'" target="_blank">see more..</a>)';
+         echo $row['device_name'].' (<a href="reviews.php?id='.$row['id'].'&name='.$row['device_name'].'" target="_blank">see more..</a>)';
           echo '</figcaption>';
 	echo	'</br>';
          echo '<a id="update" href ="deleteDfunction.php?id='.$row['id'].'"> Delete </a> &nbsp&nbsp&nbsp&nbsp'
