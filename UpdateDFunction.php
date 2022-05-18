@@ -5,7 +5,7 @@ include('connection.php');
     $Did= $_GET['id'];
     
     if (empty($_POST['deviceName']) || empty($_POST['Description']) ){
-        $_SESSION['fill'] = 'please fill all in the form';
+        $_SESSION['incorrect'] = 'please fill all in the form';
         header("Location: UpdateDevice.php?id=$Did");  
     }
     
@@ -39,7 +39,7 @@ include('connection.php');
      
         if ( $requestResult ){
           $_SESSION['success'] = 'Request has been updated';
-          header("Location: UpdateDevice.php");
+          header("Location: AdminHome.php");
         }
 ?>
 
