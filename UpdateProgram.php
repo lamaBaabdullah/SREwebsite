@@ -7,6 +7,7 @@
    <title>Update Program</title>
     <script src="js/add.js"></script>
 	  <script type="text/javascript" src="script.js"></script>
+          <script type="text/javascript" src="js/add.js"></script>
 	   <script src="https://kit.fontawesome.com/ff4e223e2d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
 	  
@@ -18,8 +19,7 @@
  <?php
  include('connection.php');
     
-         $_SESSION["id"]= 3 ; 
-         $Pid = $_SESSION["id"] ;
+         $Pid= $_GET['id'];
  ?>
   <header>
   <img class="attach" id="logopic" src="images/logo.png" alt="logo" width="20%" > 
@@ -30,7 +30,7 @@
 	
     <nav>
   <a href="AdminHome.php">Home</a>
-      <a href="index.html"> Log-out</a>
+  <a href="LogOut.php"> Log-out</a>
       
     </nav>
   </header>
@@ -41,8 +41,17 @@
     <section id='steezy'>
 	  <?php
 	  echo'<form id="myForm" action="UpdatePFunction.php?id='.$Pid.'"'.' method="post" enctype="multipart/form-data" >'; ?>
-            <fieldset> 
+            <fieldset>
                 <legend> Update Program </legend>
+                <?php
+                 $msg = $_SESSION['incorrect'];
+                if(isset($_SESSION['incorrect'])){
+                        echo "<span>".$msg."</span>";
+                    }
+			    unset( $_SESSION['incorrect']);
+                            echo '</br>';
+                     ?>
+                
 				</br>
 		 <label>Select major for the program:</label>
                  	  
@@ -182,7 +191,7 @@
                 }
              ?>
 		 </br></br>
-                 <button class="submit" type="submit" id="submit" onclick="validation1(); return false">Submit</button>
+                 <button class="submit" type="submit" id="submit" onclick="">Submit</button>
 				 <input  class="submit" type="button" id=" Cancel" value="Cancel" onclick="Cancel()">
 				 </br>
 				 </br>
