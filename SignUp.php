@@ -23,12 +23,12 @@
         if(!empty($AdminFN)&&!empty($AdminLN)&&!empty($AdminEmail)&&!empty($AdminPhone)&&!empty($AdminPassword)){
 
          if (!preg_match('/^[a-zA-Z _]{3,50}+$/',$AdminFN)){	
-              $_SESSION['signUp'] = "First name must has no numbers";
+              $_SESSION['signUp'] = "First name must be at least 3 letters";
               header("Location: sign-up.php");
          }
          else
          if (!preg_match('/^[a-zA-Z _]{3,50}+$/',$AdminLN)){	
-              $_SESSION['signUp'] = "Last name must has no numbers";
+              $_SESSION['signUp'] = "Last name must be at least 3 letters";
               header("Location: sign-up.php");
          }
          else
@@ -37,7 +37,7 @@
               header("Location: sign-up.php");
          }
          else
-         if(!preg_replace("/[^0-9]/", '', $AdminPhone)){
+         if(preg_match('/[^0-9]/',$AdminPhone)){
               $_SESSION['signUp'] = "Phone number must contain only numbers";
               header("Location: sign-up.php");
          }
@@ -76,6 +76,7 @@
              $query="INSERT INTO manager (first_name, last_name, email, phone ,password) VALUES('$AdminFN','$AdminLN','$AdminEmail','$AdminPhone','$AdminPassword')";
              $result = (mysqli_query( $connection, $query));
              $_SESSION['entered']='entered';
+             $_SESSION['name']="".$AdminFN." ".$AdminLN;
              header("Location: AdminHome.php");
             }
          }
