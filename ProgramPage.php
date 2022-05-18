@@ -4,19 +4,18 @@
 <head>
 
   <meta charset="UTF-8">
-    <title>ProgramsPage</title>
+      <title>DevicesPage</title>
        
 	  <script type="text/javascript" src="script.js"></script>
 	   <script src="https://kit.fontawesome.com/ff4e223e2d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-	 <script src="javaS.js">  </script>
 	  
    
 </head>
 
 
 <body>
-  
+    
     <?php
     
     $connection = mysqli_connect("localhost", "root", "root", "SRE-4");
@@ -27,19 +26,30 @@
     }
     
     ?>
+ 
   <header>
-  <img class="attach" id="logopic" src="images/logo.png" alt="logo" width="20%" > 
+ <img class="attach" id="logopic" src="images/logo.png" alt="logo" width="20%" > 
  
     <h3>Sticky Header Pow!</h3>
 	
      
 	
-    <nav>
-     <a href="index.html">Home</a>
-      <a href="log in.php">Admin log-in</a>
-	   <a href="sign-up.php">New admin? sgin-up</a>
-      
-    </nav>
+<nav>
+<?php
+session_start();
+        if(!isset($_SESSION['entered'])){
+            echo '<a href="index.php">Home</a>';
+            echo '<a href="#real">Categories</a>';
+            echo '<a href="log in.php">Admin log-in</a>';
+	    echo '<a href="sign-up.php">New admin? sign-up</a>';
+        }
+        
+        else{
+            echo '<a href="AdminHome.php">Home</a>';
+            echo '<a href="LogOut.php"> Log-out</a>';
+        }
+?>
+</nav>
   </header>
   
    <main>
@@ -47,12 +57,15 @@
   
     <section id='steezy'>
 	
-
-        <div id="wrapper">
+  <div id="wrapper">
     <div id="gallery" class="clearfix">
         
-         <?php 
-  $sql = "SELECT * FROM program";
+        
+        
+      
+          
+          <?php 
+  $sql = "SELECT * FROM device";
   $result = mysqli_query($connection, $sql);
              
    while($row = mysqli_fetch_assoc($result))
@@ -60,67 +73,19 @@
       echo "<figure>";
       echo '<img id="revimg" src="'.$row['photo'].'"  alt="tree sketching">'  ; 
       echo "<figcaption>";
-      echo $row['program_name'].'(<a href="reviews.php?id='.$row['id'].'&name='.$row['program_name'].'" target="_blank">see more..</a>)';
+      echo $row['device_name'].'(<a href="reviews.php?id='.$row['id'].'&name='.$row['device_name'].'" target="_blank">see more..</a>)';
       echo "</figcaption>";
       echo "</figure>";
    }   
           
           ?>
-        
-     
+           
+	  
+	  
 	  
     </div> <!-- end img gallery wrapper -->
   </div> <!-- end content wrapper -->
-        
-            
     </section>
-	
-	  <section id='real'>
-              
-	  <h4> Do you want to have programs recommendations ?</h4>
-          <form method="post">
-        <label for="major">Choose Your Major to display recommendations:</label>
-
-            <select id="majors" name="majorr">
-               <option value=" "></option>
-               <option value="Software Engineering">Software Engineering</option>
-               <option value="Information Technology">Information Technology</option>
-               <option value="Computer Science">Computer Science</option>
-               <option value="Information Systems">Information Systems</option>
-               <option value="Data Science">IT - Data Science</option>
-               <option value="Cyber Security">IT - Cyber Security </option>
-               <option value="Internet Of Things">IT - Internet Of Things</option>
-            </select>
-        <input type="submit" value="Submit">
-	</form>		
-          </br>
-			</br>
-			</br>
-                        
-<?php
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']=="POST")
-  {
-$selectOption = $_POST['majorr'];
-
-$sql2 = "SELECT * FROM program";
-$result2 = mysqli_query($connection, $sql2);
-   echo "<table>" ;         
-   while($row2 = mysqli_fetch_assoc($result2))
-   {
-       if ($row2['major'] == $selectOption){
-           echo '<tr><td id="displayRecommend"><img src="'.$row2['photo'].'" hight="200" width="200"><br><a href="reviews.php?id='.$row2['id'].'&name='.$row2['program_name'].'">'.$row2['program_name'].'</a></td></tr>';
-           
-       }
-       
-   }
-    echo "</table>";
- }
-?>
-             
-       
-
-    </section>
-	
 
 
    
