@@ -44,8 +44,7 @@ $checkQuery = mysqli_query($connection, $checkSql);
 while($row = mysqli_fetch_assoc($checkQuery)){
 $name = $row['program_name'];
 header('Location: reviews.php?id='.$itemID.'&name='.$name);
-}
-}
+}}
 ?>
 </body>
 </html>
