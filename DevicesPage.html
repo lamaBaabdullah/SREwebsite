@@ -15,6 +15,17 @@
 
 
 <body>
+    
+    <?php
+    
+    $connection = mysqli_connect("localhost", "root", "root", "SRE-4");
+    $error = mysqli_connect_error();
+
+    if ($error != null) {
+        echo "<p> Couldn't connect to database</p>";
+    }
+    
+    ?>
  
   <header>
  <img class="attach" id="logopic" src="images/logo.png" alt="logo" width="20%" > 
@@ -26,8 +37,8 @@
     <nav>
 	
 	    <a href="index.html">Home</a>
-      <a href="log in.html">Admin log-in</a>
-	   <a href="sign-up.html">New admin? sign-up</a>
+      <a href="log in.php">Admin log-in</a>
+	   <a href="sign-up.php">New admin? sgin-up</a>
 
       
     </nav>
@@ -40,37 +51,27 @@
 	
   <div id="wrapper">
     <div id="gallery" class="clearfix">
-      <figure>
-        <img id="revimg" src="images/dell.jpg"  alt="tree sketching">
-        <figcaption>
-         Dell Inspiron (<a href="reviews.html" target="_blank">see more..</a>)
-        </figcaption>
-      </figure>
+        
+        
+        
       
-     
-      
-      <figure>
-        <img id="revimg" src="images/mac.jpg" alt="Puppy Love">
-        <figcaption>
-          2022 MacBook Air (<a href="reviews.html" target="_blank">see more..</a>)
-        </figcaption>
-      </figure>
-      
-      <figure>
-        <img id="revimg" src="images/ipad.jpg"  alt="Float On Elephant">
-        <figcaption>
-           Ipad air (<a href="reviews.html" target="_blank">see more..</a>)
-        </figcaption>
-      </figure>
-      
-      <figure>
-        <img id="revimg" src="images/Galaxy.jpg"alt="Shooting Stars">
-        <figcaption>
-           Galaxy Tab Ultra (<a href="reviews.html" target="_blank">see more..</a>)
-        </figcaption>
-      </figure>
-      
-    
+          
+          <?php 
+  $sql = "SELECT * FROM device";
+  $result = mysqli_query($connection, $sql);
+             
+   while($row = mysqli_fetch_assoc($result))
+   {
+      echo "<figure>";
+      echo '<img id="revimg" src="'.$row['photo'].'"  alt="tree sketching">'  ; 
+      echo "<figcaption>";
+      echo $row['device_name'].'(<a href="reviews.php?id='.$row['id'].'&name='.$row['device_name'].'" target="_blank">see more..</a>)';
+      echo "</figcaption>";
+      echo "</figure>";
+   }   
+          
+          ?>
+           
 	  
 	  
 	  
