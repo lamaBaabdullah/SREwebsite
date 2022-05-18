@@ -20,9 +20,9 @@
  <?php
  
     
-    $connection = mysqli_connect("localhost", "root", "root", "SRE");
+    $connection = mysqli_connect("localhost", "root", "root", "SRE-4");
     $error = mysqli_connect_error();
-
+    session_start();
     if ($error != null) {
         echo "<p> Couldn't connect to database</p>";
     }
@@ -41,12 +41,22 @@ $ElectronicId=$_GET['id'];
 	
      
 	
-    <nav>
-     <a href="index.html">Home</a>
-      <a href="log in.php">Admin log-in</a>
-	   <a href="sign-up.php">New admin? sgin-up</a>
-      
-    </nav>
+ <nav>
+<?php
+session_start();
+        if(!isset($_SESSION['entered'])){
+            echo '<a href="index.php">Home</a>';
+            echo '<a href="#real">Categories</a>';
+            echo '<a href="log in.php">Admin log-in</a>';
+	    echo '<a href="sign-up.php">New admin? sign-up</a>';
+        }
+        
+        else{
+            echo '<a href="AdminHome.php">Home</a>';
+            echo '<a href="LogOut.php"> Log-out</a>';
+        }
+?>
+</nav>
   </header>
   
    <main>
@@ -119,7 +129,9 @@ echo '<p id ="Reviews">'.$row4['review'].'</p><br>';
    
 </div>
         <?php
-       echo '<a id ="addrev" href="addReview.php?category='.$which.'&Id='.$ElectronicId.'">Add review</a>';
+        if(!isset($_SESSION['entered'])){
+       echo '<a id ="addrev" href="addReview.php?category='.$which.'&Id='.$ElectronicId.'&name='.$ElectronicName.'">Add review</a>';
+        }
 ?>
     </section>
 
