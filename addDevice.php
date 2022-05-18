@@ -7,9 +7,15 @@
   <title>Add Device</title>
       
 	  <script type="text/javascript" src="script.js"></script>
+          <script type="text/javascript" src="js/add.js"></script>
 	   <script src="https://kit.fontawesome.com/ff4e223e2d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-	  
+    <style>
+        img{
+            height: 250;
+            width: 250;
+        }
+    </style>
    
 </head>
 
@@ -29,7 +35,7 @@
 	
     <nav>
 	  <a href="AdminHome.php">Home</a>
-      <a href="index.html"> Log-out</a>
+          <a href="LogOut.php"> Log-out</a>
 	
       
     </nav>
@@ -39,7 +45,8 @@
   <div class="wrapper">
   
     <section id='steezy'>
-	  <form id="myForm" action="addDevice_function.php" method="POST" enctype="multipart/form-data">
+	   <?php
+	  echo'<form id="myForm" action="addDevice_function.php" method="post" enctype="multipart/form-data" >'; ?>
             <fieldset> 
                 <legend> New Device</legend>
            <?php
@@ -62,9 +69,9 @@
 		 <label>Add photo:</label>
                  </br> 
 				  </br>
-                 <input  class="file" type="file"  id="img" name="image" accept="image/*">
+                  <input  class="file" type="file" name="file" id="img" accept="image/*" >
 		 </br></br>
-                 <button class="submit" type="submit" id="submit" onclick="validation2();return false">Submit</button>
+                 <button class="submit" type="submit" id="submit" onclick="">Submit</button>
 				 <input  class="submit" type="button" id=" Cancel" value="Cancel" onclick="Cancel()">
 				 </br>
 				 </br>
