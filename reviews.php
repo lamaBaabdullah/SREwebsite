@@ -128,7 +128,9 @@ echo '<p id ="Reviews">'.$row4['review'].'</p><br>';
  ?>
    
 </div>
+	    
         <?php
+	    //the add review button only appear to user NOT the admin
         if(!isset($_SESSION['entered'])){
        echo '<a id ="addrev" href="addReview.php?category='.$which.'&Id='.$ElectronicId.'&name='.$ElectronicName.'">Add review</a>';
         }
