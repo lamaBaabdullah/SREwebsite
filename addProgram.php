@@ -7,6 +7,7 @@
    <title>Add Program</title>
    
 	  <script type="text/javascript" src="script.js"></script>
+          <script type="text/javascript" src="js/add.js"></script>
 	   <script src="https://kit.fontawesome.com/ff4e223e2d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
 	  
@@ -28,7 +29,7 @@
 	
     <nav>
   <a href="AdminHome.php">Home</a>
-      <a href="index.html"> Log-out</a>
+  <a href="LogOut.php"> Log-out</a>
       
     </nav>
   </header>
@@ -37,7 +38,8 @@
   <div class="wrapper">
   
     <section id='steezy'>
-	   <form id="myForm" action="addProgram_function.php" method="POST" enctype="multipart/form-data">
+	   <?php
+	  echo'<form id="myForm" action="addProgram_function.php" method="post" enctype="multipart/form-data" >'; ?>
             <fieldset> 
                 <legend> New Program </legend>
                 
@@ -76,9 +78,9 @@
 		 </br>
                  </br> 
                  
-                 <input  class="file" type="file" name="image" id="img"  accept="image/*">
+            <input  class="file" type="file" name="file" id="img" accept="image/*" >
 		 </br></br>
-                 <button class="submit" type="submit" id="submit" onclick="validation1(); return false">Submit</button>
+                 <button class="submit" type="submit" id="submit" onclick="">Submit</button>
 				 <input  class="submit" type="button" id=" Cancel" value="Cancel" onclick="Cancel()">
 				 </br>
 				 </br>
