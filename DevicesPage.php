@@ -34,14 +34,22 @@
 	
      
 	
-    <nav>
-	
-	    <a href="index.html">Home</a>
-      <a href="log in.php">Admin log-in</a>
-	   <a href="sign-up.php">New admin? sgin-up</a>
-
-      
-    </nav>
+<nav>
+<?php
+session_start();
+        if(!isset($_SESSION['entered'])){
+            echo '<a href="index.php">Home</a>';
+            echo '<a href="#real">Categories</a>';
+            echo '<a href="log in.php">Admin log-in</a>';
+	    echo '<a href="sign-up.php">New admin? sign-up</a>';
+        }
+        
+        else{
+            echo '<a href="AdminHome.php">Home</a>';
+            echo '<a href="LogOut.php"> Log-out</a>';
+        }
+?>
+</nav>
   </header>
   
    <main>
