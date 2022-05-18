@@ -52,6 +52,7 @@
                       $rowPass = $row['password'];
                       if($rowPass == $AdminPassword){
                              $_SESSION['entered']='entered';
+                             $_SESSION['name']="".$row['first_name']." ".$row['last_name']."";
                              header("Location: AdminHome.php");
                       }
                 }
